@@ -1,0 +1,19 @@
+@baseUrl = http://localhost:4000
+
+# @name create_rural_producer
+POST {{baseUrl}}/rural-producers
+Content-Type: application/json
+
+{
+  "name": "Seu Zé",
+  "cpfCnpj": "123.456.789-01",
+  "farm": "Fazenda São João",
+  "city": "São Paulo",
+  "state": "SP",
+  "totalArea": 310.5,
+  "arableArea": 200,
+  "vegetationArea": 110.5,
+  "cropIds": ["clre9pcoh00033b6ob25hopa1", "clre9pcon001p3b6oekx7spxy"]
+}
+
+###

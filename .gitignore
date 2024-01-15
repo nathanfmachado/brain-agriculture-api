@@ -2,7 +2,7 @@
 .env
 
 # docker volumes
-data
+data/pg/*
 
 # compiled output
 /dist
