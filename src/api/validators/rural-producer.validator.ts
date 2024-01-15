@@ -15,3 +15,11 @@ export const createRuralProducerBodySchema = z.object({
 export type CreateRuralProducerBodySchema = z.infer<
   typeof createRuralProducerBodySchema
 >;
+
+export const pageQueryParamSchema = z.coerce
+  .number()
+  .min(1)
+  .optional()
+  .default(1);
+
+export type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>;

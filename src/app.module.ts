@@ -6,6 +6,7 @@ import { RuralProducerController } from './api/controllers/rural-producer.contro
 import { RuralProducerPrismaRepository } from './data/repositories/rural-producer.prisma-repository';
 import { RuralProducerRepository } from './data/interfaces/rural-producer.repository';
 import { CreateRuralProducerUseCase } from './domain/use-cases/create-rural-producer.use-case';
+import { ListRuralProducersUseCase } from './domain/use-cases/list-rural-producers.use-case';
 
 const diRepositoryProviders = [
   {
@@ -14,7 +15,10 @@ const diRepositoryProviders = [
   },
 ];
 
-const useCaseProviders = [CreateRuralProducerUseCase];
+const useCaseProviders = [
+  CreateRuralProducerUseCase,
+  ListRuralProducersUseCase,
+];
 
 @Module({
   imports: [

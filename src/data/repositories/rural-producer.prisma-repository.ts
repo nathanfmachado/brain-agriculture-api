@@ -1,5 +1,5 @@
 import { PrismaService } from "src/prisma/prisma.service";
-import { CrudRepository } from "../interfaces/crud-repository";
+import { CrudRepository, PaginationParams } from "../interfaces/crud-repository";
 import { RuralProducerEntity } from "../interfaces/entities";
 import { Injectable } from "@nestjs/common";
 
@@ -19,9 +19,14 @@ export class RuralProducerPrismaRepository implements CrudRepository<RuralProduc
     return result as RuralProducerEntity;
   }
 
-  async findMany(data: any): Promise<RuralProducerEntity[]> {
+  async findMany(pagination: PaginationParams): Promise<RuralProducerEntity[]> {
+    const { page, limit } = pagination;
+    const take = limit ?? 20;
+    const skip = page ? (page - 1) * take : 0;
+
     const result = await this.prisma.ruralProducer.findMany({
-      where: data,
+      skip,
+      take,
       include: {
         crops: true,
       },
