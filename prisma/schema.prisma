@@ -13,7 +13,7 @@ datasource db {
 model RuralProducer {
   id             String @id @default(cuid())
   name           String
-  cpfCnpj        String @unique @map("cpf_cnpj")
+  cpfCnpj        String @map("cpf_cnpj")
   farm           String
   city           String
   state          String

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UseCase } from './use-case';
 import { CreateRuralProducerBodySchema } from 'src/api/validators/rural-producer.validator';
 import { RuralProducerRepository } from 'src/data/interfaces/rural-producer.repository';
@@ -13,7 +13,9 @@ export class CreateRuralProducerUseCase
     const { totalArea, arableArea, vegetationArea } = body;
 
     if (totalArea < arableArea + vegetationArea) {
-      throw new Error('Total area must be greater than arable and vegetation');
+      throw new BadRequestException(
+        'Total area must be greater than or equal to arable and vegetation areas',
+      );
     }
 
     await this.ruralProducerRepository.create(body);
