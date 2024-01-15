@@ -9,3 +9,34 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model RuralProducer {
+  id             String @id @default(cuid())
+  name           String
+  cpfCnpj        String @unique @map("cpf_cnpj")
+  farm           String
+  city           String
+  state          String
+  totalArea      Float  @map("total_area")
+  arableArea     Float  @map("arable_area")
+  vegetationArea Float  @map("vegetation_area")
+
+  crops Crop[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("rural_producer")
+}
+
+model Crop {
+  id   String @id @default(cuid())
+  name String
+
+  ruralProducers RuralProducer[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("crop")
+}
