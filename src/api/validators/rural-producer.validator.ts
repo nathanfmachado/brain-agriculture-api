@@ -1,7 +1,13 @@
 import { z } from 'zod';
 
+const validateCpfCnpj = (cpfCnpj: string) => {
+  const cpfCnpjRegex =
+    /(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/;
+  return cpfCnpjRegex.test(cpfCnpj);
+};
+
 export const createRuralProducerBodySchema = z.object({
-  cpfCnpj: z.string(),
+  cpfCnpj: z.string().refine(validateCpfCnpj, 'Invalid CPF/CNPJ'),
   name: z.string(),
   farm: z.string(),
   city: z.string(),
@@ -25,7 +31,7 @@ export const pageQueryParamSchema = z.coerce
 export type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>;
 
 export const updateRuralProducerBodySchema = z.object({
-  cpfCnpj: z.string().optional(),
+  cpfCnpj: z.string().refine(validateCpfCnpj, 'Invalid CPF/CNPJ').optional(),
   name: z.string().optional(),
   farm: z.string().optional(),
   city: z.string().optional(),
