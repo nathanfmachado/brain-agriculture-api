@@ -29,10 +29,27 @@ export interface UpdateRuralProducerRepositoryParams {
   };
 }
 
+export interface GetFarmsTotalsResponseModel {
+  total: number;
+  total_area: number;
+  arable_area: number;
+  vegetation_area: number;
+}
+
+export interface ChartResponseModel {
+  label: string;
+  value: number;
+}
+
+
 export abstract class RuralProducerRepository extends CrudRepository<RuralProducerEntity> {
   abstract findById(id: string): Promise<RuralProducerEntity>;
   abstract findMany(data: PaginationParams): Promise<RuralProducerEntity[]>;
   abstract create(data: CreateRuralProducerRepositoryParams): Promise<RuralProducerEntity>;
   abstract update(data: UpdateRuralProducerRepositoryParams): Promise<RuralProducerEntity>;
   abstract delete(id: string): Promise<void>;
+
+  abstract getFarmsTotals(): Promise<GetFarmsTotalsResponseModel>;
+  abstract getPerStateChart(): Promise<ChartResponseModel[]>;
+  abstract getPerCropChart(): Promise<ChartResponseModel[]>;
 }

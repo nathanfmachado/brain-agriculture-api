@@ -61,4 +61,19 @@ export class RuralProducerInMemoryRepository implements RuralProducerRepository 
     );
   }
 
+  async getFarmsTotals(): Promise<any> {
+    return [];
+  }
+
+  async getPerStateChart(): Promise<any> {
+    return [];
+  }
+
+  async getPerCropChart(): Promise<any> {
+    return [];
+  }
+
+  async getPerAreaTypeChart(): Promise<any> {
+    return [];
+  }
 }

@@ -9,6 +9,8 @@ import { CreateRuralProducerUseCase } from './domain/use-cases/create-rural-prod
 import { ListRuralProducersUseCase } from './domain/use-cases/list-rural-producers.use-case';
 import { UpdateRuralProducerUseCase } from './domain/use-cases/update-rural-producer.use-case';
 import { DeleteRuralProducerUseCase } from './domain/use-cases/delete-rural-producer.use-case';
+import { DashboardController } from './api/controllers/dashboard.controller';
+import { GetDashboardUseCase } from './domain/use-cases/get-dashboard.use-case';
 
 const diRepositoryProviders = [
   {
@@ -22,6 +24,7 @@ const useCaseProviders = [
   UpdateRuralProducerUseCase,
   ListRuralProducersUseCase,
   DeleteRuralProducerUseCase,
+  GetDashboardUseCase,
 ];
 
 @Module({
@@ -31,7 +34,7 @@ const useCaseProviders = [
       isGlobal: true,
     }),
   ],
-  controllers: [RuralProducerController],
+  controllers: [RuralProducerController, DashboardController],
   providers: [PrismaService, ...diRepositoryProviders, ...useCaseProviders],
 })
 export class AppModule {}

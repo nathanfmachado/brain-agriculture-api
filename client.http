@@ -10,7 +10,7 @@ Content-Type: application/json
   "cpfCnpj": "123.456.789-01",
   "farm": "Fazenda São João",
   "city": "São Paulo",
-  "state": "SP",
+  "state": "GO",
   "totalArea": 310.5,
   "arableArea": 200,
   "vegetationArea": 110.5,
@@ -37,5 +37,10 @@ Content-Type: application/json
 
 # @name delete_rural_producer
 DELETE {{baseUrl}}/rural-producers/{{ruralProducerId}}
+
+###
+
+# @name get_dashboard
+GET {{baseUrl}}/dashboard
 
 ###
