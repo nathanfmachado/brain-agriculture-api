@@ -8,6 +8,7 @@ import { RuralProducerRepository } from './data/interfaces/rural-producer.reposi
 import { CreateRuralProducerUseCase } from './domain/use-cases/create-rural-producer.use-case';
 import { ListRuralProducersUseCase } from './domain/use-cases/list-rural-producers.use-case';
 import { UpdateRuralProducerUseCase } from './domain/use-cases/update-rural-producer.use-case';
+import { DeleteRuralProducerUseCase } from './domain/use-cases/delete-rural-producer.use-case';
 
 const diRepositoryProviders = [
   {
@@ -20,6 +21,7 @@ const useCaseProviders = [
   CreateRuralProducerUseCase,
   UpdateRuralProducerUseCase,
   ListRuralProducersUseCase,
+  DeleteRuralProducerUseCase,
 ];
 
 @Module({

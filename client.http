@@ -32,3 +32,10 @@ Content-Type: application/json
   "name": "Seu Zezinho",
   "cropIds": ["clre9pcoh00033b6ob25hopa1"]
 }
+
+###
+
+# @name delete_rural_producer
+DELETE {{baseUrl}}/rural-producers/{{ruralProducerId}}
+
+###

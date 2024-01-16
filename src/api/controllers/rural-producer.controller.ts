@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ZodValidationPipe } from 'src/api/pipes';
 import {
   CreateRuralProducerBodySchema,
@@ -9,6 +18,7 @@ import {
   updateRuralProducerBodySchema,
 } from 'src/api/validators/rural-producer.validator';
 import { CreateRuralProducerUseCase } from 'src/domain/use-cases/create-rural-producer.use-case';
+import { DeleteRuralProducerUseCase } from 'src/domain/use-cases/delete-rural-producer.use-case';
 import { ListRuralProducersUseCase } from 'src/domain/use-cases/list-rural-producers.use-case';
 import { UpdateRuralProducerUseCase } from 'src/domain/use-cases/update-rural-producer.use-case';
 
@@ -18,6 +28,7 @@ export class RuralProducerController {
     private createRuralProducerUseCase: CreateRuralProducerUseCase,
     private updateRuralProducerUseCase: UpdateRuralProducerUseCase,
     private listRuralProducersUseCase: ListRuralProducersUseCase,
+    private deleteRuralProducerUseCase: DeleteRuralProducerUseCase,
   ) {}
 
   @Post()
@@ -43,5 +54,10 @@ export class RuralProducerController {
     body: UpdateRuralProducerBodySchema,
   ) {
     await this.updateRuralProducerUseCase.exec({ ...body, id });
+  }
+
+  @Delete('/:id')
+  async delete(@Param('id') id: string) {
+    await this.deleteRuralProducerUseCase.exec(id);
   }
 }
