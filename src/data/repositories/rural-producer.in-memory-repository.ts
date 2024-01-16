@@ -1,6 +1,7 @@
+import { NotFoundException } from "@nestjs/common";
 import { PaginationParams } from "../interfaces/crud-repository";
 import { RuralProducerEntity } from "../interfaces/entities";
-import { RuralProducerRepository } from "../interfaces/rural-producer.repository";
+import { RuralProducerRepository, UpdateRuralProducerRepositoryParams } from "../interfaces/rural-producer.repository";
 
 
 
@@ -14,27 +15,36 @@ export class RuralProducerInMemoryRepository implements RuralProducerRepository 
   }
 
   async findMany(pagination?: PaginationParams): Promise<RuralProducerEntity[]> {
-    const { page, limit } = pagination;
+    const { page, limit } = pagination ?? {};
     const take = limit ?? 20;
     const skip = page ? (page - 1) * take : 0;
 
     return this.ruralProducers.slice(skip, skip + take);
   }
 
-  async findById(id: string): Promise<RuralProducerEntity | null> {
-    return this.ruralProducers.find((ruralProducer) => ruralProducer.id === id) ?? null;
+  async findById(id: string): Promise<RuralProducerEntity> {
+    return this.ruralProducers.find((ruralProducer) => ruralProducer.id === id);
   }
 
-  async update(data: any): Promise<RuralProducerEntity | null> {
+  async update(data: UpdateRuralProducerRepositoryParams): Promise<RuralProducerEntity> {
     const ruralProducer = await this.findById(data.id);
 
     if (!ruralProducer) {
-      return null;
+      return;
     }
 
     const updatedRuralProducer = {
-      ...ruralProducer,
-      ...data,
+      id: ruralProducer.id,
+      name: data.name ?? ruralProducer.name,
+      cpfCnpj: data.cpfCnpj ?? ruralProducer.cpfCnpj,
+      farm: data.farm ?? ruralProducer.farm,
+      city: data.city ?? ruralProducer.city,
+      state: data.state ?? ruralProducer.state,
+      totalArea: data.totalArea ?? ruralProducer.totalArea,
+      arableArea: data.arableArea ?? ruralProducer.arableArea,
+      vegetationArea: data.vegetationArea ?? ruralProducer.vegetationArea,
+      crops: ruralProducer.crops, //TODO: integrate in memory crops repository
+      createdAt: ruralProducer.createdAt,
       updatedAt: new Date(),
     };
 

@@ -1,4 +1,5 @@
 @baseUrl = http://localhost:4000
+@ruralProducerId = clreby7oq00001xai7onpehru
 
 # @name create_rural_producer
 POST {{baseUrl}}/rural-producers
@@ -17,3 +18,17 @@ Content-Type: application/json
 }
 
 ###
+
+# @name list_rural_producers
+GET {{baseUrl}}/rural-producers
+
+###
+
+# @name update_rural_producer
+PUT {{baseUrl}}/rural-producers/{{ruralProducerId}}
+Content-Type: application/json
+
+{
+  "name": "Seu Zezinho",
+  "cropIds": ["clre9pcoh00033b6ob25hopa1"]
+}

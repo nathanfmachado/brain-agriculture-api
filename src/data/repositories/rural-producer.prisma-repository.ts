@@ -8,7 +8,7 @@ import { Injectable } from "@nestjs/common";
 export class RuralProducerPrismaRepository implements CrudRepository<RuralProducerEntity> {
   constructor(private prisma: PrismaService) {}
 
-  async findById(id: string): Promise<RuralProducerEntity | null> {
+  async findById(id: string): Promise<RuralProducerEntity> {
     const result = await this.prisma.ruralProducer.findUnique({
       where: { id },
       include: {
@@ -78,7 +78,10 @@ export class RuralProducerPrismaRepository implements CrudRepository<RuralProduc
       totalArea,
       arableArea,
       vegetationArea,
-      cropIds,
+      crops: {
+        idsToDisconnect,
+        idsToConnect,
+      },
     } = data;
 
     const result = await this.prisma.ruralProducer.update({
@@ -93,7 +96,8 @@ export class RuralProducerPrismaRepository implements CrudRepository<RuralProduc
         arableArea,
         vegetationArea,
         crops: {
-          connect: cropIds,
+          disconnect: idsToDisconnect?.map((id: string) => ({ id })),
+          connect: idsToConnect?.map((id: string) => ({ id })),
         },
       },
     });

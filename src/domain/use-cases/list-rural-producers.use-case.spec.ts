@@ -46,7 +46,7 @@ describe('ListRuralProducersUseCase', () => {
 
   it('should list rural producers succesfully', async () => {
     const ruralProducers = await listRuralProducersUseCase.exec();
-    console.log('ruralProducers', ruralProducers);
+
     expect(ruralProducers.length).toBe(2);
   });
 });
