@@ -24,14 +24,17 @@ $ docker compose up -d
 $ npm install
 ```
 
-4 - Run database seeding to use as example:
+4 - Run database migrations:
+```bash
+$ npx prisma migrate deploy
+```
 
+5 - Seed database to have some examples:
 ```bash
 $ npm run db:seed
 ```
 
 5 - The app is ready to run:
-
 ```bash
 # development with watch mode
 $ npm run start:dev
